@@ -10,7 +10,7 @@ categories: php docker xdebug vscode
 
 ![](https://user-images.githubusercontent.com/15811067/75740409-4d757c00-5ce6-11ea-844f-865094d30c9c.png)
 
-{% include embed.html url="https://www.youtube.com/watch?v=uKtL10q6Rh0" %}
+{% include embed.html url="https://www.youtube.com/embed/uKtL10q6Rh0" %}
 
 O ambiente de desenvolvimento funcionará segundo a arquitetura descrita na Figura 1, tendo o Visual Studio Code como IDE que realizará o debug do código, e o Docker rodando um contêiner com PHP e XDebug, além de ter um volume mapeado entre a pasta em que está o código a se realizar debug e a pasta raíz do apache dentro do contêiner (`/var/www/html`), desta forma o código alterado no computador também está sendo alterado dentro do contêiner.
 

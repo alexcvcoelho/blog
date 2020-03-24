@@ -26,7 +26,7 @@
           # to push our website updates to the `gh-pages` branch.
           # Notice that we are specifying the path to the action here.
           # We will create those files in a sec
-          - uses: alexcvcoelho/jekyll-deploy-gh-pages@v1
+          - uses: alexcvcoelho/jekyll-deploy-gh-pages@master
             env:
               # Now make sure you add this environment variable.
               # This token will allow us to push to github directly

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<title>Instalação do IRPF 2020 no Linux | Alex Coelho [Blog]</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Este não é um artigo originalmente meu, pois é baseado, para não dizer praticamente copiado do tutorial disponível no Blog do Edivaldo, então o mérito é todo...">
+<meta name="author" content="Alex Coelho">
+<meta name="generator" content="Jekyll v4.0.0">
+<link rel="canonical" href="https://alexcvcoelho.github.io/blog/instalacao-irpf-2020-linux/">
+
+<link rel="stylesheet" href="/blog/assets/css/index.css">
+
+<link rel="stylesheet" href="/blog/assets/css/classes.css">
+<link rel="stylesheet" href="/blog/assets/css/sidebar.css" media="screen and (min-width: 70em)">
+<link rel="alternate" href="/blog/feed.xml" type="application/atom+xml" title="Alex Coelho [Blog]">
+
+
+
+
+<header class="icons">
+  
+    <a href="/blog/" class="title">Alex Coelho [Blog]</a>
+  
+  
+    
+  <nav>
+  <a aria-label="" href="" ><svg aria-hidden="true" class="hidden"><use xlink:href="/blog/assets/fontawesome/icons.svg#home"></use></svg></a>
+  <a aria-label="" href="" ><svg aria-hidden="true" class="hidden"><use xlink:href="/blog/assets/fontawesome/icons.svg#address-card"></use></svg></a>
+  
+  </nav>
+
+
+    
+  <nav>
+  <a aria-label="Contato" href="mailto:alexcvcoelho@gmail.com" ><svg aria-hidden="true" ><use xlink:href="/blog/assets/fontawesome/icons.svg#envelope"></use></svg><span aria-hidden="true" class="hidden">Contato</span></a>
+  <a aria-label="Sobre mim" href="https://alexcvcoelho.github.io/cv" ><svg aria-hidden="true" ><use xlink:href="/blog/assets/fontawesome/icons.svg#github"></use></svg><span aria-hidden="true" class="hidden">Sobre mim</span></a>
+  <a aria-label="RSS" href="/blog/feed.xml" ><svg aria-hidden="true" ><use xlink:href="/blog/assets/fontawesome/icons.svg#rss"></use></svg><span aria-hidden="true" class="hidden">RSS</span></a>
+  
+  </nav>
+
+
+  
+  
+</header>
+
+<article>
+  <header class="meta">
+    
+      <div class="categories">TUTORIAL, INSTALACAO, LINUX</div>
+    
+    <h1><a href="/blog/instalacao-irpf-2020-linux/">Instalação do IRPF 2020 no Linux</a></h1><time datetime="2020-03-23T03:00:00+00:00">March 23, 2020</time>
+  </header>
+  
+    <p>Este não é um artigo originalmente meu, pois é baseado, para não dizer praticamente copiado do tutorial disponível no <a href="https://www.edivaldobrito.com.br/como-instalar-a-versao-multiplataforma-do-irpf-2020-no-linux-manualmente/" target="_blank">Blog do Edivaldo</a>, então o mérito é todo dele. Mas vou fazer esse tutorial aqui também até para servir como uma documentação pessoal, pois é algo que todo ano eu utilizo e obviamente não lembro de cabeça, então vou manter aqui até para facilitar a minha vida e de outras pessoas também.</p>
+
+<p>Tá, mas porque diabos eu to instalando o IRPF no Linux? É porque utilizo Linux no meu computador pessoal, mais especificamente um Kubuntu, mas porque Kubuntu? Gosto da estabilidade e facilidades do Ubuntu e acho linda a interface KDE, sem contar que no SSD a performance é muito boa. Mas enfim tudo isso são apenas gostos, se você usa o Windows, nada contra você, nem a favor, mas este tutorial não vai te ajudar muito, recomendo acessar algum outro tutorial pela net.</p>
+
+<p>Vamos lá, bora instalar essa bagaça. Vou instalar de maneira manual que é a forma em que acredito ser mais fácil de gerenciar versões anteriores e saber onde está cada coisa.</p>
+
+<h3 id="passo-1">PASSO 1.</h3>
+
+<p>Abre o terminal né criatura.</p>
+
+<hr />
+<h3 id="passo-2">PASSO 2.</h3>
+
+<p>Se você ja seguiu este tutorial no ano passado a sua instalação vai estar na pasta <code class="highlighter-rouge">/opt</code>, se desejar excluir a instalação anterior é só rodar o seguinte comando excluindo qualquer diretório que contenha irpf inicialmente:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo rm</span> <span class="nt">-Rf</span> /opt/irpf<span class="k">*</span>
+</code></pre></div></div>
+<p>Provavelmente você também tenha um atalho de acesso rápido criado, para deletá-lo use o seguinde comando, ou você pode reutilizá-lo apenas alterando algumas infotrmações dentro dele para que ele referencie a nova versão:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo rm</span> <span class="nt">-Rf</span> /usr/share/applications/irpf.desktop
+</code></pre></div></div>
+<hr />
+
+<h3 id="passo-3">PASSO 3.</h3>
+
+<p>Baixe o arquivo zip através do comando a seguir:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://downloadirpf.receita.fazenda.gov.br/irpf/2020/irpf/arquivos/IRPF2020-1.5.zip <span class="nt">-O</span> irpf2020.zip
+</code></pre></div></div>
+
+<p>Caso o comando apresente algum problema de certificados execute ele com uma opção a mais, como descrito a seguir:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">--no-check-certificate</span> https://downloadirpf.receita.fazenda.gov.br/irpf/2020/irpf/arquivos/IRPF2020-1.5.zip <span class="nt">-O</span> irpf2020.zip
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="passo-4">PASSO 4.</h3>
+
+<p>Descompacte o arquivo baixado para a pasta <code class="highlighter-rouge">/opt</code></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>unzip irpf2020.zip <span class="nt">-d</span> /opt/
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="passo-5">PASSO 5.</h3>
+
+<p>Renomeie a pasta criada:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo mv</span> /opt/IRPF<span class="k">*</span>/ /opt/irpf2020
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="passo-6">PASSO 6.</h3>
+
+<p>Para facilitar a execução do programa crie um lançador para ele, assim ele ficará disponível no menu de acesso rápido:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nt">-e</span> <span class="s1">'[Desktop Entry]\n Version=1.0\n Name=irpf2020\n Exec=java -Xms128M -Xmx512M -jar /opt/irpf2020/irpf.jar\n Icon=/\n Type=Application\n Categories=Application'</span> | <span class="nb">sudo tee</span> /usr/share/applications/irpf2020.desktop
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod</span> +x /usr/share/applications/irpf2020.desktop
+</code></pre></div></div>
+
+<p>Caso deseje, você pode criar uma cópia deste arquivo na área de trabalho</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> /usr/share/applications/irpf2020.desktop  ~/Área<span class="se">\ </span>de<span class="se">\ </span>Trabalho/
+</code></pre></div></div>
+
+<hr />
+
+<p>É isso aí, logo após esses passos você já pode executar o programa normalmente.</p>
+
+    
+  
+</article>
+
+
+
+  <footer class="related">
+    <div class="previous"><span>Previous Post</span><a href="/blog/welcome-to-jekyll/">Welcome to Jekyll!</a></div>
+    <div class="next"></div>
+  </footer>
+
+
+
+</html>

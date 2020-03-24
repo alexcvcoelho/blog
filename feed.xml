@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="pt-BR"><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://alexcvcoelho.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://alexcvcoelho.github.io/blog/" rel="alternate" type="text/html" hreflang="pt-BR" /><updated>2020-03-24T22:57:11+00:00</updated><id>https://alexcvcoelho.github.io/blog/feed.xml</id><title type="html">Alex Coelho [Blog]</title><subtitle>Este é um blog pessoal, aqui compartilho um pouco do que eu sei com as pessoas, sempre com a intenção de ajudar ao próximo. Em geral gosto de postar coisas que tento fazer mas não encontro bons tutoriais que ensinem, então tento ajudar desta forma.</subtitle><author><name>Alex Coelho</name></author><entry><title type="html">Instalação do IRPF 2020 no Linux</title><link href="https://alexcvcoelho.github.io/blog/instalacao-irpf-2020-linux/" rel="alternate" type="text/html" title="Instalação do IRPF 2020 no Linux" /><published>2020-03-23T03:00:00+00:00</published><updated>2020-03-23T03:00:00+00:00</updated><id>https://alexcvcoelho.github.io/blog/instalacao-irpf-2020-linux</id><content type="html" xml:base="https://alexcvcoelho.github.io/blog/instalacao-irpf-2020-linux/">&lt;p&gt;Este não é um artigo originalmente meu, pois é baseado, para não dizer praticamente copiado do tutorial disponível no &lt;a href=&quot;https://www.edivaldobrito.com.br/como-instalar-a-versao-multiplataforma-do-irpf-2020-no-linux-manualmente/&quot; target=&quot;_blank&quot;&gt;Blog do Edivaldo&lt;/a&gt;, então o mérito é todo dele. Mas vou fazer esse tutorial aqui também até para servir como uma documentação pessoal, pois é algo que todo ano eu utilizo e obviamente não lembro de cabeça, então vou manter aqui até para facilitar a minha vida e de outras pessoas também.&lt;/p&gt;
+
+&lt;p&gt;Tá, mas porque diabos eu to instalando o IRPF no Linux? É porque utilizo Linux no meu computador pessoal, mais especificamente um Kubuntu, mas porque Kubuntu? Gosto da estabilidade e facilidades do Ubuntu e acho linda a interface KDE, sem contar que no SSD a performance é muito boa. Mas enfim tudo isso são apenas gostos, se você usa o Windows, nada contra você, nem a favor, mas este tutorial não vai te ajudar muito, recomendo acessar algum outro tutorial pela net.&lt;/p&gt;
+
+&lt;p&gt;Vamos lá, bora instalar essa bagaça. Vou instalar de maneira manual que é a forma em que acredito ser mais fácil de gerenciar versões anteriores e saber onde está cada coisa.&lt;/p&gt;
+
+&lt;h3 id=&quot;passo-1&quot;&gt;PASSO 1.&lt;/h3&gt;
+
+&lt;p&gt;Abre o terminal né criatura.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;passo-2&quot;&gt;PASSO 2.&lt;/h3&gt;
+
+&lt;p&gt;Se você ja seguiu este tutorial no ano passado a sua instalação vai estar na pasta &lt;code class=&quot;highlighter-rouge&quot;&gt;/opt&lt;/code&gt;, se desejar excluir a instalação anterior é só rodar o seguinte comando excluindo qualquer diretório que contenha irpf inicialmente:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Rf&lt;/span&gt; /opt/irpf&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Provavelmente você também tenha um atalho de acesso rápido criado, para deletá-lo use o seguinde comando, ou você pode reutilizá-lo apenas alterando algumas infotrmações dentro dele para que ele referencie a nova versão:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Rf&lt;/span&gt; /usr/share/applications/irpf.desktop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;passo-3&quot;&gt;PASSO 3.&lt;/h3&gt;
+
+&lt;p&gt;Baixe o arquivo zip através do comando a seguir:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget http://downloadirpf.receita.fazenda.gov.br/irpf/2020/irpf/arquivos/IRPF2020-1.5.zip &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt; irpf2020.zip
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Caso o comando apresente algum problema de certificados execute ele com uma opção a mais, como descrito a seguir:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget &lt;span class=&quot;nt&quot;&gt;--no-check-certificate&lt;/span&gt; https://downloadirpf.receita.fazenda.gov.br/irpf/2020/irpf/arquivos/IRPF2020-1.5.zip &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt; irpf2020.zip
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;passo-4&quot;&gt;PASSO 4.&lt;/h3&gt;
+
+&lt;p&gt;Descompacte o arquivo baixado para a pasta &lt;code class=&quot;highlighter-rouge&quot;&gt;/opt&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;unzip irpf2020.zip &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; /opt/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;passo-5&quot;&gt;PASSO 5.&lt;/h3&gt;
+
+&lt;p&gt;Renomeie a pasta criada:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo mv&lt;/span&gt; /opt/IRPF&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;/ /opt/irpf2020
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;passo-6&quot;&gt;PASSO 6.&lt;/h3&gt;
+
+&lt;p&gt;Para facilitar a execução do programa crie um lançador para ele, assim ele ficará disponível no menu de acesso rápido:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'[Desktop Entry]\n Version=1.0\n Name=irpf2020\n Exec=java -Xms128M -Xmx512M -jar /opt/irpf2020/irpf.jar\n Icon=/\n Type=Application\n Categories=Application'&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;sudo tee&lt;/span&gt; /usr/share/applications/irpf2020.desktop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo chmod&lt;/span&gt; +x /usr/share/applications/irpf2020.desktop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Caso deseje, você pode criar uma cópia deste arquivo na área de trabalho&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; /usr/share/applications/irpf2020.desktop  ~/Área&lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;de&lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;Trabalho/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;É isso aí, logo após esses passos você já pode executar o programa normalmente.&lt;/p&gt;</content><author><name>Alex Coelho</name></author><summary type="html">Este não é um artigo originalmente meu, pois é baseado, para não dizer praticamente copiado do tutorial disponível no Blog do Edivaldo, então o mérito é todo dele. Mas vou fazer esse tutorial aqui também até para servir como uma documentação pessoal, pois é algo que todo ano eu utilizo e obviamente não lembro de cabeça, então vou manter aqui até para facilitar a minha vida e de outras pessoas também. Tá, mas porque diabos eu to instalando o IRPF no Linux? É porque utilizo Linux no meu computador pessoal, mais especificamente um Kubuntu, mas porque Kubuntu? Gosto da estabilidade e facilidades do Ubuntu e acho linda a interface KDE, sem contar que no SSD a performance é muito boa. Mas enfim tudo isso são apenas gostos, se você usa o Windows, nada contra você, nem a favor, mas este tutorial não vai te ajudar muito, recomendo acessar algum outro tutorial pela net. Vamos lá, bora instalar essa bagaça. Vou instalar de maneira manual que é a forma em que acredito ser mais fácil de gerenciar versões anteriores e saber onde está cada coisa. PASSO 1. Abre o terminal né criatura. PASSO 2. Se você ja seguiu este tutorial no ano passado a sua instalação vai estar na pasta /opt, se desejar excluir a instalação anterior é só rodar o seguinte comando excluindo qualquer diretório que contenha irpf inicialmente: sudo rm -Rf /opt/irpf* Provavelmente você também tenha um atalho de acesso rápido criado, para deletá-lo use o seguinde comando, ou você pode reutilizá-lo apenas alterando algumas infotrmações dentro dele para que ele referencie a nova versão: sudo rm -Rf /usr/share/applications/irpf.desktop PASSO 3. Baixe o arquivo zip através do comando a seguir: wget http://downloadirpf.receita.fazenda.gov.br/irpf/2020/irpf/arquivos/IRPF2020-1.5.zip -O irpf2020.zip Caso o comando apresente algum problema de certificados execute ele com uma opção a mais, como descrito a seguir: wget --no-check-certificate https://downloadirpf.receita.fazenda.gov.br/irpf/2020/irpf/arquivos/IRPF2020-1.5.zip -O irpf2020.zip PASSO 4. Descompacte o arquivo baixado para a pasta /opt sudo unzip irpf2020.zip -d /opt/ PASSO 5. Renomeie a pasta criada: sudo mv /opt/IRPF*/ /opt/irpf2020 PASSO 6. Para facilitar a execução do programa crie um lançador para ele, assim ele ficará disponível no menu de acesso rápido: echo -e '[Desktop Entry]\n Version=1.0\n Name=irpf2020\n Exec=java -Xms128M -Xmx512M -jar /opt/irpf2020/irpf.jar\n Icon=/\n Type=Application\n Categories=Application' | sudo tee /usr/share/applications/irpf2020.desktop sudo chmod +x /usr/share/applications/irpf2020.desktop Caso deseje, você pode criar uma cópia deste arquivo na área de trabalho cp /usr/share/applications/irpf2020.desktop ~/Área\ de\ Trabalho/ É isso aí, logo após esses passos você já pode executar o programa normalmente.</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="https://alexcvcoelho.github.io/blog/welcome-to-jekyll/" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2020-03-03T00:57:04+00:00</published><updated>2020-03-03T00:57:04+00:00</updated><id>https://alexcvcoelho.github.io/blog/welcome-to-jekyll</id><content type="html" xml:base="https://alexcvcoelho.github.io/blog/welcome-to-jekyll/">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;Jekyll requires blog post files to be named according to the following format:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;YEAR-MONTH-DAY-title.MARKUP&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Where &lt;code class=&quot;highlighter-rouge&quot;&gt;YEAR&lt;/code&gt; is a four-digit number, &lt;code class=&quot;highlighter-rouge&quot;&gt;MONTH&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;DAY&lt;/code&gt; are both two-digit numbers, and &lt;code class=&quot;highlighter-rouge&quot;&gt;MARKUP&lt;/code&gt; is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name>Alex Coelho</name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated. Jekyll requires blog post files to be named according to the following format: YEAR-MONTH-DAY-title.MARKUP Where YEAR is a four-digit number, MONTH and DAY are both two-digit numbers, and MARKUP is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works. Jekyll also offers powerful support for code snippets: def print_hi(name) puts &quot;Hi, #{name}&quot; end print_hi('Tom') #=&amp;gt; prints 'Hi, Tom' to STDOUT. Check out the Jekyll docs for more info on how to get the most out of Jekyll. File all bugs/feature requests at Jekyll’s GitHub repo. If you have questions, you can ask them on Jekyll Talk.</summary></entry><entry><title type="html">Ambiente de Desenvolvimento PHP com Docker + XDebug + VSCode</title><link href="https://alexcvcoelho.github.io/blog/php-xdebug-docker-vscode/" rel="alternate" type="text/html" title="Ambiente de Desenvolvimento PHP com Docker + XDebug + VSCode" /><published>2019-07-13T00:57:04+00:00</published><updated>2019-07-13T00:57:04+00:00</updated><id>https://alexcvcoelho.github.io/blog/php-xdebug-docker-vscode</id><content type="html" xml:base="https://alexcvcoelho.github.io/blog/php-xdebug-docker-vscode/">&lt;blockquote&gt;
+  &lt;p&gt;Neste artigo tratarei de como montar um ambiente de desenvolvimento PHP no Linux, 
+rápido de ser instalado através do docker e que seja possível realizar 
+debug utilizando o VSCode como IDE.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/15811067/75740409-4d757c00-5ce6-11ea-844f-865094d30c9c.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div style=&quot;position: relative; margin: 1.5em 0; padding-bottom: 56.25%;&quot;&gt;
+  &lt;iframe style=&quot;position: absolute;&quot; src=&quot;https://www.youtube.com/embed/uKtL10q6Rh0&quot; width=&quot;100%&quot; height=&quot;100%&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;O ambiente de desenvolvimento funcionará segundo a arquitetura descrita na Figura 1, tendo o Visual Studio Code como IDE que realizará o debug do código, e o Docker rodando um contêiner com PHP e XDebug, além de ter um volume mapeado entre a pasta em que está o código a se realizar debug e a pasta raíz do apache dentro do contêiner (&lt;code class=&quot;highlighter-rouge&quot;&gt;/var/www/html&lt;/code&gt;), desta forma o código alterado no computador também está sendo alterado dentro do contêiner.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/15811067/75740766-5024a100-5ce7-11ea-9015-fc53eb029b6a.gif&quot; alt=&quot;Figura 1: Arquitetura do ambiente de desenvolvimento (Fonte: [XDebug](https://xdebug.org/docs/remote))&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;configuração-do-ambiente&quot;&gt;Configuração do Ambiente&lt;/h2&gt;
+&lt;p&gt;Inicialmente se você não possui o docker instalado em seu computador recomento baixar através do &lt;a href=&quot;https://docs.docker.com/install/&quot; target=&quot;_blank&quot;&gt;site oficial&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1&lt;/strong&gt; - Crie o arquivo Dockerfile apresentado abaixo em seu computador.&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/4e5195240cbb870fd32f407809fca67b.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;Nele coloquei alguns comentários para que você entenda também o que está acontecendo exatamente na criação da imagem, como pode ser visto, estou usando uma imagem oficial com Apache e PHP na versão 7.3 como base, caso você precise de uma versão específica, basta alterar a imagem base para a sua versão, aqui você pode consultar as imagens oficiais disponíveis.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;2&lt;/strong&gt; - No diretório em que foi criado o arquivo Dockerfile, abra o terminal e execute o comando para construir a imagem.&lt;/p&gt;
+
+&lt;p&gt;** Aqui estou nomeando essa imagem como php/debug, fique a vontade para utilizar um nome diferente, ou versioná-la utilizando a notação &lt;code class=&quot;highlighter-rouge&quot;&gt;php/debug:1.0&lt;/code&gt; no meu caso a versão utilizada será a &lt;code class=&quot;highlighter-rouge&quot;&gt;latest&lt;/code&gt; **&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker build -t php/debug . 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;3&lt;/strong&gt; - Com a imagem criada, é preciso agora criar o contêiner, execute o seguinte comando &lt;strong&gt;dentro da pasta em que está o código&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;** O primeiro parâmetro passado para o Docker está dizendo para fazer um link entre a porta 80 do host (seu computador) com a porta 80 do contêiner, o segundo parâmetro faz o link entre a pasta atual do host com a pasta pública de dentro do contêiner **&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -p &quot;80:80&quot; -v $PWD:/var/www/html -d php/debug
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Neste momento o contêiner já está funcionando com o XDebug pronto para responder qualquer chamada feita pelo VSCode, pois em nosso Dockerfile já existe a configuração &lt;code class=&quot;highlighter-rouge&quot;&gt;xdebug.remote_connect_back=on&lt;/code&gt; que permite ao XDebug responder a qualquer IDE que realizar uma requisição a ele, sem a necessidade de especificarmos a qual IP o XDebug deve responder.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;4&lt;/strong&gt; - Agora iremos configurar o VSCode, para isso abra a pasta do código dentro do VSCode, agora clique em “Debug” no menu lateral da esquerda (ou Ctrl+Shift+D) e clique na engrenagem que aparecerá na parte superior do menu lateral (open launch.json) no arquivo &lt;code class=&quot;highlighter-rouge&quot;&gt;launch.json&lt;/code&gt; utilize a seguinte configuração.&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/e369f71382eb434df3b50c653b73ee72.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;Nele é especificado a porta pela qual o VSCode vai se comunicar com o XDebug (por padrão é a 9000), a configuração &lt;code class=&quot;highlighter-rouge&quot;&gt;stopOnEntry&lt;/code&gt; diz se o debug parará na primeira linha de código ou apenas quando encontrar um breakpoint. A configuração que não pode faltar neste arquivo é a &lt;code class=&quot;highlighter-rouge&quot;&gt;pathMappings&lt;/code&gt;, a qual garante o sincronismo entre os arquivos da IDE com os que estão sendo analisados pelo XDebug dentro do contêiner, essa configuração contêm o caminho da pasta em que está o código no contêiner (&lt;code class=&quot;highlighter-rouge&quot;&gt;/var/www/html&lt;/code&gt;), seguido do caminho da pasta no host (no meu caso &lt;code class=&quot;highlighter-rouge&quot;&gt;/home/apps/php/projetoteste&lt;/code&gt;).&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;5&lt;/strong&gt; - Neste momento o nosso ambiente já está configurado e para ver o resultado, basta adicionar um Breakpoint no código, apertar F5 no VSCode e acessar seu código pelo browser :)&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;dica&quot;&gt;Dica&lt;/h2&gt;
+&lt;p&gt;Durante a criação do meu ambiente um dos erros que cometi foi mapear errado as pastas dentro do VSCode na configuração pathMappings, e só fui descobrir que o erro que eu estava tendo era esse, quando habilitei o stopOnEntry , então fica a dica, se algo der errado verifique se o caminho está mapeado corretamente, tanto no VSCode quanto na hora da criação do contêiner.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusão&quot;&gt;Conclusão&lt;/h2&gt;
+&lt;p&gt;Uma possível melhoria a ser feita nesse ambiente é criar um docker-compose para o contêiner PHP adicionando outros contêineres que por ventura venham a existir em sua aplicação, como MySQL por exemplo, assim é possível rodar todo o ambiente de desenvolvimento utilizando apenas imagens do Docker sem a necessidade de instalar essas ferramentas diretamente no host, mas meu foco aqui foi mostrar um pouco mais detalhado como realizar o debug de um código que está dentro de um contêiner.&lt;/p&gt;</content><author><name>Alex Coelho</name></author><summary type="html">Neste artigo tratarei de como montar um ambiente de desenvolvimento PHP no Linux, rápido de ser instalado através do docker e que seja possível realizar debug utilizando o VSCode como IDE. O ambiente de desenvolvimento funcionará segundo a arquitetura descrita na Figura 1, tendo o Visual Studio Code como IDE que realizará o debug do código, e o Docker rodando um contêiner com PHP e XDebug, além de ter um volume mapeado entre a pasta em que está o código a se realizar debug e a pasta raíz do apache dentro do contêiner (/var/www/html), desta forma o código alterado no computador também está sendo alterado dentro do contêiner. Configuração do Ambiente Inicialmente se você não possui o docker instalado em seu computador recomento baixar através do site oficial. 1 - Crie o arquivo Dockerfile apresentado abaixo em seu computador. 400: Invalid request Nele coloquei alguns comentários para que você entenda também o que está acontecendo exatamente na criação da imagem, como pode ser visto, estou usando uma imagem oficial com Apache e PHP na versão 7.3 como base, caso você precise de uma versão específica, basta alterar a imagem base para a sua versão, aqui você pode consultar as imagens oficiais disponíveis. 2 - No diretório em que foi criado o arquivo Dockerfile, abra o terminal e execute o comando para construir a imagem. ** Aqui estou nomeando essa imagem como php/debug, fique a vontade para utilizar um nome diferente, ou versioná-la utilizando a notação php/debug:1.0 no meu caso a versão utilizada será a latest ** docker build -t php/debug . 3 - Com a imagem criada, é preciso agora criar o contêiner, execute o seguinte comando dentro da pasta em que está o código. ** O primeiro parâmetro passado para o Docker está dizendo para fazer um link entre a porta 80 do host (seu computador) com a porta 80 do contêiner, o segundo parâmetro faz o link entre a pasta atual do host com a pasta pública de dentro do contêiner ** docker run -p &quot;80:80&quot; -v $PWD:/var/www/html -d php/debug Neste momento o contêiner já está funcionando com o XDebug pronto para responder qualquer chamada feita pelo VSCode, pois em nosso Dockerfile já existe a configuração xdebug.remote_connect_back=on que permite ao XDebug responder a qualquer IDE que realizar uma requisição a ele, sem a necessidade de especificarmos a qual IP o XDebug deve responder. 4 - Agora iremos configurar o VSCode, para isso abra a pasta do código dentro do VSCode, agora clique em “Debug” no menu lateral da esquerda (ou Ctrl+Shift+D) e clique na engrenagem que aparecerá na parte superior do menu lateral (open launch.json) no arquivo launch.json utilize a seguinte configuração. 400: Invalid request Nele é especificado a porta pela qual o VSCode vai se comunicar com o XDebug (por padrão é a 9000), a configuração stopOnEntry diz se o debug parará na primeira linha de código ou apenas quando encontrar um breakpoint. A configuração que não pode faltar neste arquivo é a pathMappings, a qual garante o sincronismo entre os arquivos da IDE com os que estão sendo analisados pelo XDebug dentro do contêiner, essa configuração contêm o caminho da pasta em que está o código no contêiner (/var/www/html), seguido do caminho da pasta no host (no meu caso /home/apps/php/projetoteste). 5 - Neste momento o nosso ambiente já está configurado e para ver o resultado, basta adicionar um Breakpoint no código, apertar F5 no VSCode e acessar seu código pelo browser :) Dica Durante a criação do meu ambiente um dos erros que cometi foi mapear errado as pastas dentro do VSCode na configuração pathMappings, e só fui descobrir que o erro que eu estava tendo era esse, quando habilitei o stopOnEntry , então fica a dica, se algo der errado verifique se o caminho está mapeado corretamente, tanto no VSCode quanto na hora da criação do contêiner. Conclusão Uma possível melhoria a ser feita nesse ambiente é criar um docker-compose para o contêiner PHP adicionando outros contêineres que por ventura venham a existir em sua aplicação, como MySQL por exemplo, assim é possível rodar todo o ambiente de desenvolvimento utilizando apenas imagens do Docker sem a necessidade de instalar essas ferramentas diretamente no host, mas meu foco aqui foi mostrar um pouco mais detalhado como realizar o debug de um código que está dentro de um contêiner.</summary></entry></feed>

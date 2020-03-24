@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<title>Ambiente de Desenvolvimento PHP com Docker + XDebug + VSCode | Alex Coelho [Blog]</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Neste artigo tratarei de como montar um ambiente de desenvolvimento PHP no Linux, rápido de ser instalado através do docker e que seja possível realizar debu...">
+<meta name="author" content="Alex Coelho">
+<meta name="generator" content="Jekyll v4.0.0">
+<link rel="canonical" href="https://alexcvcoelho.github.io/blog/php-xdebug-docker-vscode/">
+
+<link rel="stylesheet" href="/blog/assets/css/index.css">
+
+<link rel="stylesheet" href="/blog/assets/css/classes.css">
+<link rel="stylesheet" href="/blog/assets/css/sidebar.css" media="screen and (min-width: 70em)">
+<link rel="alternate" href="/blog/feed.xml" type="application/atom+xml" title="Alex Coelho [Blog]">
+
+
+
+
+<header class="icons">
+  
+    <a href="/blog/" class="title">Alex Coelho [Blog]</a>
+  
+  
+    
+  <nav>
+  <a aria-label="" href="" ><svg aria-hidden="true" class="hidden"><use xlink:href="/blog/assets/fontawesome/icons.svg#home"></use></svg></a>
+  <a aria-label="" href="" ><svg aria-hidden="true" class="hidden"><use xlink:href="/blog/assets/fontawesome/icons.svg#address-card"></use></svg></a>
+  
+  </nav>
+
+
+    
+  <nav>
+  <a aria-label="Contato" href="mailto:alexcvcoelho@gmail.com" ><svg aria-hidden="true" ><use xlink:href="/blog/assets/fontawesome/icons.svg#envelope"></use></svg><span aria-hidden="true" class="hidden">Contato</span></a>
+  <a aria-label="Sobre mim" href="https://alexcvcoelho.github.io/cv" ><svg aria-hidden="true" ><use xlink:href="/blog/assets/fontawesome/icons.svg#github"></use></svg><span aria-hidden="true" class="hidden">Sobre mim</span></a>
+  <a aria-label="RSS" href="/blog/feed.xml" ><svg aria-hidden="true" ><use xlink:href="/blog/assets/fontawesome/icons.svg#rss"></use></svg><span aria-hidden="true" class="hidden">RSS</span></a>
+  
+  </nav>
+
+
+  
+  
+</header>
+
+<article>
+  <header class="meta">
+    
+      <div class="categories">PHP, DOCKER, XDEBUG, VSCODE</div>
+    
+    <h1><a href="/blog/php-xdebug-docker-vscode/">Ambiente de Desenvolvimento PHP com Docker + XDebug + VSCode</a></h1><time datetime="2019-07-13T00:57:04+00:00">July 13, 2019</time>
+  </header>
+  
+    <blockquote>
+  <p>Neste artigo tratarei de como montar um ambiente de desenvolvimento PHP no Linux, 
+rápido de ser instalado através do docker e que seja possível realizar 
+debug utilizando o VSCode como IDE.</p>
+</blockquote>
+
+<p><img src="https://user-images.githubusercontent.com/15811067/75740409-4d757c00-5ce6-11ea-844f-865094d30c9c.png" alt="" /></p>
+
+<div style="position: relative; margin: 1.5em 0; padding-bottom: 56.25%;">
+  <iframe style="position: absolute;" src="https://www.youtube.com/embed/uKtL10q6Rh0" width="100%" height="100%" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<p>O ambiente de desenvolvimento funcionará segundo a arquitetura descrita na Figura 1, tendo o Visual Studio Code como IDE que realizará o debug do código, e o Docker rodando um contêiner com PHP e XDebug, além de ter um volume mapeado entre a pasta em que está o código a se realizar debug e a pasta raíz do apache dentro do contêiner (<code class="highlighter-rouge">/var/www/html</code>), desta forma o código alterado no computador também está sendo alterado dentro do contêiner.</p>
+
+<p><img src="https://user-images.githubusercontent.com/15811067/75740766-5024a100-5ce7-11ea-9015-fc53eb029b6a.gif" alt="Figura 1: Arquitetura do ambiente de desenvolvimento (Fonte: [XDebug](https://xdebug.org/docs/remote))" /></p>
+
+<h2 id="configuração-do-ambiente">Configuração do Ambiente</h2>
+<p>Inicialmente se você não possui o docker instalado em seu computador recomento baixar através do <a href="https://docs.docker.com/install/" target="_blank">site oficial</a>.</p>
+
+<p><strong>1</strong> - Crie o arquivo Dockerfile apresentado abaixo em seu computador.</p>
+
+<noscript><pre>400: Invalid request
+</pre></noscript>
+<script src="https://gist.github.com/4e5195240cbb870fd32f407809fca67b.js"> </script>
+
+<p>Nele coloquei alguns comentários para que você entenda também o que está acontecendo exatamente na criação da imagem, como pode ser visto, estou usando uma imagem oficial com Apache e PHP na versão 7.3 como base, caso você precise de uma versão específica, basta alterar a imagem base para a sua versão, aqui você pode consultar as imagens oficiais disponíveis.</p>
+
+<hr />
+
+<p><strong>2</strong> - No diretório em que foi criado o arquivo Dockerfile, abra o terminal e execute o comando para construir a imagem.</p>
+
+<p>** Aqui estou nomeando essa imagem como php/debug, fique a vontade para utilizar um nome diferente, ou versioná-la utilizando a notação <code class="highlighter-rouge">php/debug:1.0</code> no meu caso a versão utilizada será a <code class="highlighter-rouge">latest</code> **</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build -t php/debug . 
+</code></pre></div></div>
+
+<hr />
+
+<p><strong>3</strong> - Com a imagem criada, é preciso agora criar o contêiner, execute o seguinte comando <strong>dentro da pasta em que está o código</strong>.</p>
+
+<p>** O primeiro parâmetro passado para o Docker está dizendo para fazer um link entre a porta 80 do host (seu computador) com a porta 80 do contêiner, o segundo parâmetro faz o link entre a pasta atual do host com a pasta pública de dentro do contêiner **</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -p "80:80" -v $PWD:/var/www/html -d php/debug
+</code></pre></div></div>
+
+<p>Neste momento o contêiner já está funcionando com o XDebug pronto para responder qualquer chamada feita pelo VSCode, pois em nosso Dockerfile já existe a configuração <code class="highlighter-rouge">xdebug.remote_connect_back=on</code> que permite ao XDebug responder a qualquer IDE que realizar uma requisição a ele, sem a necessidade de especificarmos a qual IP o XDebug deve responder.</p>
+
+<hr />
+
+<p><strong>4</strong> - Agora iremos configurar o VSCode, para isso abra a pasta do código dentro do VSCode, agora clique em “Debug” no menu lateral da esquerda (ou Ctrl+Shift+D) e clique na engrenagem que aparecerá na parte superior do menu lateral (open launch.json) no arquivo <code class="highlighter-rouge">launch.json</code> utilize a seguinte configuração.</p>
+
+<noscript><pre>400: Invalid request
+</pre></noscript>
+<script src="https://gist.github.com/e369f71382eb434df3b50c653b73ee72.js"> </script>
+
+<p>Nele é especificado a porta pela qual o VSCode vai se comunicar com o XDebug (por padrão é a 9000), a configuração <code class="highlighter-rouge">stopOnEntry</code> diz se o debug parará na primeira linha de código ou apenas quando encontrar um breakpoint. A configuração que não pode faltar neste arquivo é a <code class="highlighter-rouge">pathMappings</code>, a qual garante o sincronismo entre os arquivos da IDE com os que estão sendo analisados pelo XDebug dentro do contêiner, essa configuração contêm o caminho da pasta em que está o código no contêiner (<code class="highlighter-rouge">/var/www/html</code>), seguido do caminho da pasta no host (no meu caso <code class="highlighter-rouge">/home/apps/php/projetoteste</code>).</p>
+
+<hr />
+
+<p><strong>5</strong> - Neste momento o nosso ambiente já está configurado e para ver o resultado, basta adicionar um Breakpoint no código, apertar F5 no VSCode e acessar seu código pelo browser :)</p>
+
+<hr />
+
+<h2 id="dica">Dica</h2>
+<p>Durante a criação do meu ambiente um dos erros que cometi foi mapear errado as pastas dentro do VSCode na configuração pathMappings, e só fui descobrir que o erro que eu estava tendo era esse, quando habilitei o stopOnEntry , então fica a dica, se algo der errado verifique se o caminho está mapeado corretamente, tanto no VSCode quanto na hora da criação do contêiner.</p>
+
+<h2 id="conclusão">Conclusão</h2>
+<p>Uma possível melhoria a ser feita nesse ambiente é criar um docker-compose para o contêiner PHP adicionando outros contêineres que por ventura venham a existir em sua aplicação, como MySQL por exemplo, assim é possível rodar todo o ambiente de desenvolvimento utilizando apenas imagens do Docker sem a necessidade de instalar essas ferramentas diretamente no host, mas meu foco aqui foi mostrar um pouco mais detalhado como realizar o debug de um código que está dentro de um contêiner.</p>
+
+
+    
+  
+</article>
+
+
+
+  <footer class="related">
+    <div class="previous"></div>
+    <div class="next"><span>Next Post</span><a href="/blog/welcome-to-jekyll/">Welcome to Jekyll!</a></div>
+  </footer>
+
+
+
+</html>
